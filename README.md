@@ -1,4 +1,4 @@
 # Eng-6-Rummy
-Rummy Card Game for ENG 6 Class
+This was created for the class "ENG 6: Engineering Problem Solving", a MATLAB programming course.
 
-Should contain all project files; anyone with MATLAB should be able to download & run.
+Feel free to take inspiration for your own class projects, future ENG 6 students.
