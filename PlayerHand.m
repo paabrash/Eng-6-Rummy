@@ -30,6 +30,12 @@ classdef PlayerHand < CardArray
             obj.cards(index) = [];
         end
 
+        function swapCards(obj, indices)
+            index1 = indices(1);
+            index2 = indices(2);
+            obj.cards([index1, index2]) = obj.cards([index2, index1]);
+        end
+
         function winner = get.isWinning(obj)
             winner = true;
         end

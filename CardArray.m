@@ -11,10 +11,15 @@ classdef CardArray < handle
             ["Ace", string(2:10), "Jack", "Queen", "King"]' + ...
             " of " + ...
             ["Spades", "Hearts", "Diamonds", "Clubs"];
+        filenamesArray = ...
+            ["A", string(2:10), "J", "Q", "K"]' + ...
+            " " + ...
+            ["SPADE", "HEART", "DIAMOND", "CLUB"];
     end
 
     properties (Dependent)
         topCard
+        filenames
     end
 
     methods
@@ -29,8 +34,7 @@ classdef CardArray < handle
 
         function cardsString = OutputCards(obj)
             cardNames = obj.namesArray(obj.cards);
-            cardsString = string(1:length(obj.cards)) + ". " + cardNames;
-            cardsString = reshape(cardsString,[],1);
+            cardsString = reshape(cardNames,[],1);
         end
 
         function [] = printCards(obj)
@@ -52,11 +56,15 @@ classdef CardArray < handle
         end
 
         function [] = SortByRank(obj)
-            [~, indices] = sort(mod(obj.cards, 13));
+            [~, indices] = sort(mod(obj.cards - 1, 13));
             obj.cards = obj.cards(indices);
         end
+
         function topCard = get.topCard(obj)
-            topCard = obj.namesArray(obj.cards(1));
+            topCard = obj.filenamesArray(obj.cards(1)) + ".svg";
+        end
+        function topCard = get.filenames(obj)
+            topCard = reshape(obj.filenamesArray(obj.cards) + ".svg", 1, []);
         end
     end
 
