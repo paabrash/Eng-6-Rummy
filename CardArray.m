@@ -2,23 +2,29 @@ classdef CardArray < handle
 
 
     properties
-        cards;
+        cards; % Array of numbers representing playing cards
     end
 
     properties (Constant)
+        % Correspondence between card names & numbers
         namesArray = ...
             ["Ace", string(2:10), "Jack", "Queen", "King"]' + ...
             " of " + ...
             ["Spades", "Hearts", "Diamonds", "Clubs"];
     end
 
-        properties (Dependent)
-        frontCard
+    properties (Dependent)
+        topCard
     end
 
     methods
         function obj = CardArray(cards)
+            if isnumeric(cards)
                 obj.cards = cards;
+            else
+                print("Error: Cards vector not numeric")
+            end
+            
         end
 
         function cardsString = OutputCards(obj)
@@ -49,8 +55,8 @@ classdef CardArray < handle
             [~, indices] = sort(mod(obj.cards, 13));
             obj.cards = obj.cards(indices);
         end
-        function frontCard = get.frontCard(obj)
-            frontCard = obj.namesArray(obj.cards(1));
+        function topCard = get.topCard(obj)
+            topCard = obj.namesArray(obj.cards(1));
         end
     end
 

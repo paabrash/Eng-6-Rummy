@@ -16,7 +16,7 @@ classdef PlayerHand < CardArray
             obj.discardPile = discardPile;
         end
         
-        function [] = drawCard(obj, drawFromDiscard)
+        function [] = DrawCard(obj, drawFromDiscard)
             switch drawFromDiscard
                 case false
                     obj.drawPile.TransferCard(obj, 1);
@@ -27,6 +27,7 @@ classdef PlayerHand < CardArray
 
         function [] = discard(obj, index)
             obj.discardPile.cards = [obj.cards(index), obj.discardPile.cards];
+            obj.cards(index) = [];
         end
 
         function winner = get.isWinning(obj)
