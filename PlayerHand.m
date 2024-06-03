@@ -19,6 +19,11 @@ classdef PlayerHand < CardArray
         function [] = DrawCard(obj, drawFromDiscard)
             switch drawFromDiscard
                 case false
+                    if isempty(obj.drawPile.cards)
+                        obj.drawPile.cards = obj.discardPile.cards;
+                        obj.drawPile.Shuffle;
+                        obj.drawPile.transferCard(obj.discardPile, 1);
+                    end
                     obj.drawPile.TransferCard(obj, 1);
                 case true
                     obj.discardPile.TransferCard(obj,1);
