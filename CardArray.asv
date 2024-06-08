@@ -19,7 +19,6 @@ classdef CardArray < handle
 
     properties (Dependent)
         topCard
-        topCardFile
         secondCard
         filenames
     end
@@ -62,33 +61,12 @@ classdef CardArray < handle
             obj.cards = obj.cards(indices);
         end
 
-        function index = findCard(obj, cardToFind)
-            indices = 1:length(obj.cards);
-            index = indices(obj.cards == cardToFind);
-        end
-
         function topCard = get.topCard(obj)
-            if isempty(obj.cards)
-                topCard = 0;
-            else
-                topCard = obj.cards(1);
-            end
-
-        end
-
-        function topCardFile = get.topCardFile(obj)
-            if isempty(obj.cards) || obj.cards(1) == 0
-                topCardFile = "images/misc/cardPlacehold.png";
-            else
-                topCardFile = "images/cards/" + obj.filenamesArray(obj.cards(1)) + ".svg";
-            end
+            topCard = obj.filenamesArray(obj.cards(1)) + ".svg";
         end
         
         function secondCard = get.secondCard(obj)
-            if isscalar(obj.cards) || isempty(obj.cards)
-                secondCard = 0;
-            else
-                secondCard = obj.cards(2);
+            if isscalar(obj.cards)
             end
         end
 

@@ -1,6 +1,11 @@
-Hand = [28 29 30 9 22 35 48]
-tf = checkRummyHand(Hand)
+load("winners", "listOfWinners")
+winnerList = listOfWinners;
+numWinners = length(winnerList);
+RoundsWonByPlayer1 = (winnerList == 1)'
+RoundsWonByPlayer2 = (winnerList == 2)'
+summerMatrix = tril(ones(numWinners))
 
-if tf
-disp("yes")
-end
+player1Cumulative = summerMatrix * RoundsWonByPlayer1
+player2Cumulative = summerMatrix * RoundsWonByPlayer2
+
+plot(1:numWinners, player1Cumulative, 1:numWinners, player2Cumulative)
