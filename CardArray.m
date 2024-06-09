@@ -23,6 +23,7 @@ classdef CardArray < handle
         lastCardFile
         secondCard
         filenames
+        secondCardFile
     end
 
     methods
@@ -107,6 +108,13 @@ classdef CardArray < handle
             end
         end
 
+        function secondCardFile = get.secondCardFile(obj)
+            if isempty(obj.cards) || obj.cards(1) == 0
+                secondCardFile = fullfile("images", "misc", "cardPlacehold.png");
+            else
+                secondCardFile = fullfile("images", "cards", obj.filenamesArray(obj.cards(2)) + ".svg");
+            end
+        end
         function filenames = get.filenames(obj)
             filenames = fullfile("images", "cards",...
                 reshape(obj.filenamesArray(obj.cards) + ".svg", 1, []));
