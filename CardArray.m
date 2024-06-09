@@ -19,7 +19,11 @@ classdef CardArray < handle
 
     properties (Dependent)
         topCard
+        topCardFile
+        lastCardFile
+        secondCard
         filenames
+        secondCardFile
     end
 
     methods
@@ -60,11 +64,60 @@ classdef CardArray < handle
             obj.cards = obj.cards(indices);
         end
 
-        function topCard = get.topCard(obj)
-            topCard = obj.filenamesArray(obj.cards(1)) + ".svg";
+        function index = findCard(obj, cardToFind)
+            indices = 1:length(obj.cards);
+            index = indices(obj.cards == cardToFind);
         end
-        function topCard = get.filenames(obj)
-            topCard = reshape(obj.filenamesArray(obj.cards) + ".svg", 1, []);
+
+        function file = fileFromIndex(obj, index)
+            card = obj.cards(index);
+            file = fullfile("images", "cards", ...
+                obj.filenamesArray(card) + ".svg");
+        end
+
+        function topCard = get.topCard(obj)
+            if isempty(obj.cards)
+                topCard = 0;
+            else
+                topCard = obj.cards(1);
+            end
+
+        end
+
+        function topCardFile = get.topCardFile(obj)
+            if isempty(obj.cards) || obj.cards(1) == 0
+                topCardFile = fullfile("images", "misc", "cardPlacehold.png");
+            else
+                topCardFile = fullfile("images", "cards", obj.filenamesArray(obj.cards(1)) + ".svg");
+            end
+        end
+
+        function lastCardFile = get.lastCardFile(obj)
+            if isempty(obj.cards) || obj.cards(1) == 0
+                lastCardFile = fullfile("images", "misc", "cardPlacehold.png");
+            else
+                lastCardFile = fullfile("images", "cards", obj.filenamesArray(obj.cards(end)) + ".svg");
+            end
+        end
+        
+        function secondCard = get.secondCard(obj)
+            if isscalar(obj.cards) || isempty(obj.cards)
+                secondCard = 0;
+            else
+                secondCard = obj.cards(2);
+            end
+        end
+
+        function secondCardFile = get.secondCardFile(obj)
+            if isempty(obj.cards) || obj.cards(1) == 0
+                secondCardFile = fullfile("images", "misc", "cardPlacehold.png");
+            else
+                secondCardFile = fullfile("images", "cards", obj.filenamesArray(obj.cards(2)) + ".svg");
+            end
+        end
+        function filenames = get.filenames(obj)
+            filenames = fullfile("images", "cards",...
+                reshape(obj.filenamesArray(obj.cards) + ".svg", 1, []));
         end
     end
 

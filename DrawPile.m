@@ -3,11 +3,11 @@ classdef DrawPile < CardArray
     methods
         
         % Constructor
-        function obj = DrawPile(isPrimaryComputer, cards)
+        function obj = DrawPile(isPrimaryComputer)
             if isPrimaryComputer
                 input = 1:52;
             else
-                input = cards;
+                input = [];
             end
             obj@CardArray(input)
         end
@@ -18,8 +18,8 @@ classdef DrawPile < CardArray
                 for handNum = 1:length(handArray)
                     obj.TransferCard(handArray(handNum), 1)
                 end
-                obj.TransferCard(discard, 1)
             end
+            obj.TransferCard(discard, 1)
         end
 
 
