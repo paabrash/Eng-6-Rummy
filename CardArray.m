@@ -70,7 +70,8 @@ classdef CardArray < handle
 
         function file = fileFromIndex(obj, index)
             card = obj.cards(index);
-            file = "images/cards/" + obj.filenamesArray(card) + ".svg";
+            file = fullfile("images", "cards", ...
+                obj.filenamesArray(card) + ".svg");
         end
 
         function topCard = get.topCard(obj)
@@ -84,17 +85,17 @@ classdef CardArray < handle
 
         function topCardFile = get.topCardFile(obj)
             if isempty(obj.cards) || obj.cards(1) == 0
-                topCardFile = "images/misc/cardPlacehold.png";
+                topCardFile = fullfile("images", "misc", "cardPlacehold.png");
             else
-                topCardFile = "images/cards/" + obj.filenamesArray(obj.cards(1)) + ".svg";
+                topCardFile = fullfile("images", "cards", obj.filenamesArray(obj.cards(1)) + ".svg");
             end
         end
 
         function lastCardFile = get.lastCardFile(obj)
             if isempty(obj.cards) || obj.cards(1) == 0
-                lastCardFile = "images/misc/cardPlacehold.png";
+                lastCardFile = fullfile("images", "misc", "cardPlacehold.png");
             else
-                lastCardFile = "images/cards/" + obj.filenamesArray(obj.cards(end)) + ".svg";
+                lastCardFile = fullfile("images", "cards", obj.filenamesArray(obj.cards(end)) + ".svg");
             end
         end
         
@@ -106,8 +107,9 @@ classdef CardArray < handle
             end
         end
 
-        function topCard = get.filenames(obj)
-            topCard = reshape(obj.filenamesArray(obj.cards) + ".svg", 1, []);
+        function filenames = get.filenames(obj)
+            filenames = fullfile("images", "cards",...
+                reshape(obj.filenamesArray(obj.cards) + ".svg", 1, []));
         end
     end
 
