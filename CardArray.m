@@ -109,7 +109,7 @@ classdef CardArray < handle
         end
 
         function secondCardFile = get.secondCardFile(obj)
-            if isempty(obj.cards) || obj.cards(1) == 0
+            if isscalar(obj.cards) || isempty(obj.cards)
                 secondCardFile = fullfile("images", "misc", "cardPlacehold.png");
             else
                 secondCardFile = fullfile("images", "cards", obj.filenamesArray(obj.cards(2)) + ".svg");
