@@ -4,3 +4,5 @@ This was created for the class "ENG 6: Engineering Problem Solving", a MATLAB pr
 The authors are Patrick Abrash, Alfredo Vazquez, and Ethan Sainz.
 
 To start, use "startRummy.mlapp".
+
+Video with code description and demo: https://youtu.be/3NnEh2J7VqY?si=KdGBSsRkyZHseCN9
